@@ -1,5 +1,7 @@
 PODS:
-  - WCApi (0.1.0)
+  - Alamofire (3.4.1)
+  - WCApi (0.1.0):
+    - Alamofire (~> 3.4)
 
 DEPENDENCIES:
   - WCApi (from `../`)
@@ -9,7 +11,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  WCApi: 3c65c50c68135d0e343c84884be39c4640de1c01
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  WCApi: 0493f2740132c54aa314f992752c97666872aef2
 
 PODFILE CHECKSUM: dfd7a3f69f666a966d04d93a93cba6ce3ceaee35
 

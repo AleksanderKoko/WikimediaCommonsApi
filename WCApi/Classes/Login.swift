@@ -25,7 +25,7 @@ public class Login : GetTokenHandlerProtocol {
         case Failed = "Failed"
     }
     
-    init(handler: LoginHandlerProtocol){
+    public init(handler: LoginHandlerProtocol){
         self.handler = handler
         self.getToken = GetToken()
         self.getToken.setHandler(self)
@@ -40,7 +40,7 @@ public class Login : GetTokenHandlerProtocol {
         self.handler.loginError(error)
     }
     
-    func login(username: String, password: String) -> Void
+    public func login(username: String, password: String) -> Void
     {
         
         self.username = username

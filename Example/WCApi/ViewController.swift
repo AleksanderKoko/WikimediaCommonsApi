@@ -7,18 +7,51 @@
 //
 
 import UIKit
+import WCApi
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, LoginHandlerProtocol{
 
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    
+    var login: Login?
+    
+    @IBAction func login(sender: AnyObject) {
+        if
+            let emailString = self.email.text,
+            let passwordString = self.password.text{
+            self.login!.login(emailString, password: passwordString)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.login = Login(handler: self)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+}
 
+extension ViewController{
+    
+    func loginSuccess(user: UserModel){
+        print(user.username)
+    }
+    
+    func loginError(error: ErrorMessageGeneral){
+        print(error)
+    }
+    
+    func loginError(error: LoginErrorFatal){
+        print(error)
+    }
+    
+    func loginError(error: LoginErrorsBadCredentials){
+        print(error)
+    }
+    
+    func loginError(error: LoginErrorNotExists){
+        print(error)
+    }
+    
 }
 

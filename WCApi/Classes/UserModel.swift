@@ -1,6 +1,6 @@
 public struct UserModel {
-    var token: String
-    var username: String
-    var id: Int
-    var sessionId: String
+    public var token: String
+    public var username: String
+    public var id: Int
+    public var sessionId: String
 }
