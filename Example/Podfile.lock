@@ -1,0 +1,16 @@
+PODS:
+  - WCApi (0.1.0)
+
+DEPENDENCIES:
+  - WCApi (from `../`)
+
+EXTERNAL SOURCES:
+  WCApi:
+    :path: ../
+
+SPEC CHECKSUMS:
+  WCApi: 3c65c50c68135d0e343c84884be39c4640de1c01
+
+PODFILE CHECKSUM: dfd7a3f69f666a966d04d93a93cba6ce3ceaee35
+
+COCOAPODS: 1.0.1

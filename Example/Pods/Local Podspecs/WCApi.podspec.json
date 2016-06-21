@@ -1,0 +1,22 @@
+{
+  "name": "WCApi",
+  "version": "0.1.0",
+  "summary": "A short description of WCApi.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/WCApi",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Aleksander Koko": "aleksanderkoko@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/WCApi.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "WCApi/Classes/**/*"
+}

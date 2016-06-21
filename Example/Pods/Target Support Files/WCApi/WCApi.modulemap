@@ -1,0 +1,6 @@
+framework module WCApi {
+  umbrella header "WCApi-umbrella.h"
+
+  export *
+  module * { export * }
+}
