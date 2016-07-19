@@ -4,23 +4,16 @@ public class GetMultimedia{
     
     internal let handler: GetMultimediaHandlerProtocol
     
-    enum ErrorMessages: String {
-        case FatalErrorCantProcessJSON
-        case FatalErrorCantGetResponse
-        case FatalErrorUnknownResultFromJSON
-        case FatalErrorCantGetResultFromJSON
-    }
-    
-    init(handler: GetMultimediaHandlerProtocol){
+    public init(handler: GetMultimediaHandlerProtocol){
         self.handler = handler
     }
     
-    func get(user: UserModel) -> Void
+    public func get(user: UserModel) -> Void
     {
         
         Alamofire.request(
             .POST,
-            "https://commons.wikimedia.org/w/api.php",
+            Config.apiUrl,
             parameters: [
                 "action": "query",
                 "format": "json",
@@ -39,11 +32,11 @@ public class GetMultimedia{
                         self.buildMultimedia(allImagesArray as! NSArray)
                         
                     }else{
-                        self.handler.getMultimediaError(GetMultimediaErrorFatal(message: ErrorMessages.FatalErrorCantGetResultFromJSON.rawValue))
+                        self.handler.getMultimediaError(GetMultimediaErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                     }
                     
                 }else{
-                    self.handler.getMultimediaError(GetMultimediaErrorFatal(message: ErrorMessages.FatalErrorCantGetResponse.rawValue))
+                    self.handler.getMultimediaError(GetMultimediaErrorFatal(message: GeneralErrorMessages.FatalErrorCantGetResponse.rawValue))
                 }
                 
         }
@@ -67,7 +60,10 @@ public class GetMultimedia{
                 let descriptionUrl: NSURL = NSURL(string: descriptionUrlString)
             {
                 
-                if (mediaTypeString == MediaTypes.image) || (mediaTypeString == MediaTypes.video) {
+                if
+                    (mediaTypeString == MultimediaModel.MediaTypes.image) ||
+                    (mediaTypeString == MultimediaModel.MediaTypes.video) ||
+                    (mediaTypeString == MultimediaModel.MediaTypes.audio) {
                     multimediaArray.append(MultimediaModel(name: name, url: url, descriptionUrl: descriptionUrl, mediaType: mediaTypeString))
                 }
                 
@@ -75,10 +71,15 @@ public class GetMultimedia{
             
         }
         
-        
         self.handler.setMultimedia(multimediaArray)
         
-        
     }
+    
+}
+
+public protocol GetMultimediaHandlerProtocol{
+    
+    func setMultimedia(multimedia: [MultimediaModel])
+    func getMultimediaError(error: GetMultimediaErrorFatal)
     
 }

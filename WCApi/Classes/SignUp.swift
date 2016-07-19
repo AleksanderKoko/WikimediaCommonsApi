@@ -13,22 +13,13 @@ public class SignUp: GetTokenHandlerProtocol {
     internal var captchaText: String?
     internal var email: String?
     
-    enum ErrorMessages: String {
-        case FatalErrorCantProcessJSON
-        case FatalErrorCantGetResponse
-        case FatalErrorUnknownResultFromJSON
-        case FatalErrorCantGetResultFromJSON
-    }
-    
     enum SignUpResults : String {
         case NeedCaptcha = "NeedCaptcha"
-        case WrongPass = "WrongPass"
-        case NoName = "NoName"
-        case NotExists = "NotExists"
-        case Success = "Success"
+        case Fail = "FAIL"
+        case Pass = "PASS"
     }
     
-    init(handler: SignUpHandlerProtocol){
+    public init(handler: SignUpHandlerProtocol){
         self.handler = handler
         self.getToken = GetToken()
         self.getToken.setHandler(self)
@@ -39,22 +30,23 @@ public class SignUp: GetTokenHandlerProtocol {
         self.makeNetworkCall()
     }
     
-    public func getTokenFatalError(error: ErrorMessageGeneral){
+    public func getTokenFatalError(error: GetTokenErrorFatal){
         self.handler.signUpError(error)
     }
     
-    func signUp(username: String, password: String, email: String?,captchaText: String?) -> Void {
+    public func signUp(username: String, password: String, email: String?, captchaId: String, captchaText: String?) -> Void {
         
         self.username = username
         self.password = password
         self.email = email
+        self.captchaId = captchaId
         self.captchaText = captchaText
         
         if self.token != nil{
             self.makeNetworkCall()
         }else{
             do {
-                try self.getToken.getToken(TokenTypes.CreateUserToken)
+                try self.getToken.getToken(GetToken.TokenTypes.CreateUserToken)
             }catch{}
         }
         
@@ -64,15 +56,17 @@ public class SignUp: GetTokenHandlerProtocol {
         
         Alamofire.request(
             .POST,
-            "https://en.wikipedia.org/w/api.php",
+            Config.apiUrl,
             parameters: [
                 "action": "createaccount",
                 "format": "json",
-                "name": self.username!,
+                "createreturnurl": "https://commons.wikimedia.org/",
+                "username": self.username!,
                 "password": self.password!,
-                "token": self.token!,
-                "captchaword": self.captchaText!,
-                "captchaid": self.captchaId!
+                "retype": self.password!,
+                "createtoken": self.token!,
+                "captchaWord": self.captchaText!,
+                "captchaId": self.captchaId!
             ]
             ).responseJSON { response in
                 
@@ -80,55 +74,44 @@ public class SignUp: GetTokenHandlerProtocol {
                     
                     print(JSON)
                     
-                    if let result = JSON.objectForKey("createaccount")?.objectForKey("result") {
+                    if let result = JSON.objectForKey("createaccount")?.objectForKey("status") {
                         
                         let resultStr : String = result as! String
                         
                         switch (resultStr) {
-                        case SignUpResults.NeedCaptcha.rawValue:
-                            
-                            if
-                                let captchaUrl = JSON.objectForKey("createaccount")?.objectForKey("captcha")?.objectForKey("url")
-                                
-                            {
-                                
-                                if let captchaId = JSON.objectForKey("createaccount")?.objectForKey("captcha")?.objectForKey("id") {
-                                    //let urlString = .baseUrl + (captchaUrl as! String)
-                                    //let url = NSURL(string: urlString)
-                                    //handler.wcSetCaptchaText(url!)
-                                    //handler.wcSetCaptchaId(captchaId as! String);
-                                }else{
-                                    //handler.wcSignUpError(WCSignUpErrorFatal(message: ErrorMessages.FatalErrorCantProcessJSON.rawValue))
-                                }
-                                
+                        case SignUpResults.Pass.rawValue:
+                            self.handler.signUpSuccess()
+                            break
+                        case SignUpResults.Fail.rawValue:
+                            if let message = JSON.objectForKey("createaccount")?.objectForKey("message;"){
+                                self.handler.signUpError(SignUpErrorFatal(message: message as! String))
                             }else{
-                                //handler.wcSignUpError(WCSignUpErrorFatal(message: ErrorMessages.FatalErrorCantProcessJSON.rawValue))
+                                self.handler.signUpError(SignUpErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                             }
-                            
                             break
-                        case    SignUpResults.NoName.rawValue:
-                                //SignUpResults.EmptyPass.rawValue,
-                                //SignUpErrorResults.WrongPass.rawValue:
-                            //handler.wcLoginError(WCLoginErrorsBadCredentials())
-                            break
-                        //case LoginErrorResults.NotExists.rawValue:
-                            //handler.wcLoginError(WCLoginErrorNotExists())
-                        //    break
                         default:
-                            //handler.wcLoginError(WCLoginErrorFatal(message: ErrorMessages.FatalErrorUnknownResultFromJSON.rawValue))
+                            self.handler.signUpError(SignUpErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                             break
                         }
                         
                     }else{
-                        //handler.wcLoginError(WCLoginErrorFatal(message: ErrorMessages.FatalErrorCantGetResultFromJSON.rawValue))
+                        self.handler.signUpError(SignUpErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                     }
                     
                 }else{
-                    //handler.wcLoginError(WCLoginErrorFatal(message: ErrorMessages.FatalErrorCantGetResponse.rawValue))
+                    self.handler.signUpError(SignUpErrorFatal(message: GeneralErrorMessages.FatalErrorCantGetResponse.rawValue))
                 }
                 
         }
         
     }
+    
+}
+
+public protocol SignUpHandlerProtocol{
+    
+    func signUpSuccess()
+    func signUpError(error: SignUpErrorFatal)
+    func signUpError(error: GetTokenErrorFatal)
     
 }

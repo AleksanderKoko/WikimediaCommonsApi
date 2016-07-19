@@ -1,11 +1,11 @@
 use_frameworks!
 
 target 'WCApi_Example' do
+  pod 'MapleBacon'
   pod 'WCApi', :path => '../'
 
   target 'WCApi_Tests' do
     inherit! :search_paths
-
     
   end
 end

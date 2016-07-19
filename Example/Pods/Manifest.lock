@@ -1,9 +1,11 @@
 PODS:
   - Alamofire (3.4.1)
+  - MapleBacon (2.0.8)
   - WCApi (0.1.0):
     - Alamofire (~> 3.4)
 
 DEPENDENCIES:
+  - MapleBacon
   - WCApi (from `../`)
 
 EXTERNAL SOURCES:
@@ -12,8 +14,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  MapleBacon: 32e3590e1730485b93f450283ff242f9444efc12
   WCApi: 0493f2740132c54aa314f992752c97666872aef2
 
-PODFILE CHECKSUM: dfd7a3f69f666a966d04d93a93cba6ce3ceaee35
+PODFILE CHECKSUM: e695c827cc26b7aedbeffcb47c205b4f586c0eea
 
 COCOAPODS: 1.0.1

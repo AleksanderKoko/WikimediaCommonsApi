@@ -9,20 +9,10 @@ public class Login : GetTokenHandlerProtocol {
     internal var password: String?
     internal var token: String?
     
-    enum ErrorMessages: String {
-        case FatalErrorCantProcessJSON
-        case FatalErrorCantGetResponse
-        case FatalErrorUnknownResultFromJSON
-        case FatalErrorCantGetResultFromJSON
-    }
-    
     internal enum LoginErrorResults : String {
-        case EmptyPass = "EmptyPass"
-        case WrongPass = "WrongPass"
-        case NoName = "NoName"
-        case NotExists = "NotExists"
-        case Success = "Success"
-        case Failed = "Failed"
+        case BadToken = "badtoken"
+        case Success = "PASS"
+        case Failed = "FAIL"
     }
     
     public init(handler: LoginHandlerProtocol){
@@ -36,7 +26,7 @@ public class Login : GetTokenHandlerProtocol {
         sendCredentials()
     }
     
-    public func getTokenFatalError(error: ErrorMessageGeneral) {
+    public func getTokenFatalError(error: GetTokenErrorFatal) {
         self.handler.loginError(error)
     }
     
@@ -47,7 +37,7 @@ public class Login : GetTokenHandlerProtocol {
         self.password = password
         
         do {
-            try self.getToken.getToken(TokenTypes.LoginToken)
+            try self.getToken.getToken(GetToken.TokenTypes.LoginToken)
         }catch{}
         
     }
@@ -56,69 +46,59 @@ public class Login : GetTokenHandlerProtocol {
         
         Alamofire.request(
             .POST,
-            "https://en.wikipedia.org/w/api.php",
+            Config.apiUrl,
             parameters: [
-                "action": "login",
+                "action": "clientlogin",
                 "format": "json",
-                "lgname": self.username!,
-                "lgpassword": self.password!,
-                "lgtoken": self.token!
+                "loginreturnurl": "http://example.org/",
+                "username": self.username!,
+                "password": self.password!,
+                "logintoken": self.token! as! String
             ]
             ).responseJSON { response in
                 
                 if let JSON = response.result.value {
                     
-                    if let result = JSON.objectForKey("login")?.objectForKey("result") {
+                    if let result = JSON.objectForKey("clientlogin")?.objectForKey("status") {
                         
                         let resultStr : String = result as! String
                         
+                        
                         switch (resultStr) {
                         case LoginErrorResults.Success.rawValue:
-                            let userJson = JSON.objectForKey("login")
-                            if let user: UserModel = self.buildUser(userJson as! NSDictionary){
-                                self.handler.loginSuccess(user)
+                            if let user = JSON.objectForKey("clientlogin")?.objectForKey("username"){
+                                self.handler.loginSuccess(UserModel(username: user as! String))
                             }else{
-                                self.handler.loginError(LoginErrorFatal(message: ErrorMessages.FatalErrorCantProcessJSON.rawValue))
+                                self.handler.loginError(LoginErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                             }
                             break
-                        case    LoginErrorResults.NoName.rawValue,
-                                LoginErrorResults.EmptyPass.rawValue,
-                                LoginErrorResults.WrongPass.rawValue,
-                                LoginErrorResults.Failed.rawValue:
+                        case LoginErrorResults.Failed.rawValue:
                             self.handler.loginError(LoginErrorsBadCredentials())
                             break
-                        case LoginErrorResults.NotExists.rawValue:
-                            self.handler.loginError(LoginErrorNotExists())
-                            break
                         default:
-                            self.handler.loginError(LoginErrorFatal(message: ErrorMessages.FatalErrorUnknownResultFromJSON.rawValue))
+                            self.handler.loginError(LoginErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                             break
                         }
                         
                     }else{
-                        self.handler.loginError(LoginErrorFatal(message: ErrorMessages.FatalErrorCantGetResultFromJSON.rawValue))
+                        self.handler.loginError(LoginErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                     }
                     
                 }else{
-                    self.handler.loginError(LoginErrorFatal(message: ErrorMessages.FatalErrorCantGetResponse.rawValue))
+                    self.handler.loginError(LoginErrorFatal(message: GeneralErrorMessages.FatalErrorCantGetResponse.rawValue))
                 }
                 
         }
         
     }
     
-    internal func buildUser(userJson: NSDictionary) -> UserModel?
-    {
-        if
-            let token: String = userJson.objectForKey("lgtoken") as? String ,
-            let username: String = userJson.objectForKey("lgusername") as? String,
-            let id: Int = userJson.objectForKey("lguserid") as? Int,
-            let sessionId: String = userJson.objectForKey("sessionid") as? String
-        {
-            return UserModel(token: token, username: username, id: id, sessionId: sessionId)
-        }else{
-            return nil
-        }
-    }
+}
+
+public protocol LoginHandlerProtocol {
+    
+    func loginSuccess(user: UserModel)
+    func loginError(error: GetTokenErrorFatal)
+    func loginError(error: LoginErrorFatal)
+    func loginError(error: LoginErrorsBadCredentials)
     
 }

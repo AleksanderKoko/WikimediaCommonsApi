@@ -8,12 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		607FACD81AFB9204008FA782 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* LoginController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		8A35994A29248BCF487FE567 /* Pods_WCApi_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D69333160079D017D7D7533B /* Pods_WCApi_Example.framework */; };
+		BB01272D1D1D1D7600F9F18E /* VideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01272C1D1D1D7600F9F18E /* VideosTableViewController.swift */; };
+		BB01272F1D1D201400F9F18E /* AudiosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB01272E1D1D201400F9F18E /* AudiosTableViewController.swift */; };
+		BB5C456F1D325E6D00C8ADF7 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB5C456E1D325E6D00C8ADF7 /* SignUpViewController.swift */; };
+		BB8AA2681D3977F60003AF85 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB8AA2671D3977F60003AF85 /* UploadViewController.swift */; };
+		BB923F331D293B9D008ED74A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB923F321D293B9D008ED74A /* ResetPasswordViewController.swift */; };
+		BBAB1ABE1D1C800000E4FFE2 /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAB1ABD1D1C800000E4FFE2 /* PhotosTableViewController.swift */; };
+		BBF833D31D1AC10600AB0C42 /* audios.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833D21D1AC10600AB0C42 /* audios.png */; };
+		BBF833D51D1ACD0D00AB0C42 /* audios@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833D41D1ACD0D00AB0C42 /* audios@2x.png */; };
+		BBF833DC1D1ACD8600AB0C42 /* videos.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833D81D1ACD8600AB0C42 /* videos.png */; };
+		BBF833DD1D1ACD8600AB0C42 /* videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833D91D1ACD8600AB0C42 /* videos@2x.png */; };
+		BBF833E01D1ACDC800AB0C42 /* photos.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833DE1D1ACDC800AB0C42 /* photos.png */; };
+		BBF833E11D1ACDC800AB0C42 /* photos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF833DF1D1ACDC800AB0C42 /* photos@2x.png */; };
 		EEF4DAEDE90E36ABC9BC0DD1 /* Pods_WCApi_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF8C8214DAD2CCA6B5064D8 /* Pods_WCApi_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +49,7 @@
 		607FACD01AFB9204008FA782 /* WCApi_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WCApi_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		607FACD71AFB9204008FA782 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -46,6 +58,18 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		61A81F65B434C27F9AA9706C /* Pods-WCApi_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCApi_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WCApi_Tests/Pods-WCApi_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B36974834A61D848B405F142 /* Pods-WCApi_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WCApi_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-WCApi_Example/Pods-WCApi_Example.release.xcconfig"; sourceTree = "<group>"; };
+		BB01272C1D1D1D7600F9F18E /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
+		BB01272E1D1D201400F9F18E /* AudiosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudiosTableViewController.swift; sourceTree = "<group>"; };
+		BB5C456E1D325E6D00C8ADF7 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		BB8AA2671D3977F60003AF85 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		BB923F321D293B9D008ED74A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		BBAB1ABD1D1C800000E4FFE2 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
+		BBF833D21D1AC10600AB0C42 /* audios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = audios.png; sourceTree = "<group>"; };
+		BBF833D41D1ACD0D00AB0C42 /* audios@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "audios@2x.png"; sourceTree = "<group>"; };
+		BBF833D81D1ACD8600AB0C42 /* videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = videos.png; sourceTree = "<group>"; };
+		BBF833D91D1ACD8600AB0C42 /* videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "videos@2x.png"; sourceTree = "<group>"; };
+		BBF833DE1D1ACDC800AB0C42 /* photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos.png; sourceTree = "<group>"; };
+		BBF833DF1D1ACDC800AB0C42 /* photos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photos@2x.png"; sourceTree = "<group>"; };
 		D69333160079D017D7D7533B /* Pods_WCApi_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WCApi_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -113,12 +137,19 @@
 		607FACD21AFB9204008FA782 /* Example for WCApi */ = {
 			isa = PBXGroup;
 			children = (
+				BBF833C31D1ABEA000AB0C42 /* Assets */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				607FACD71AFB9204008FA782 /* LoginController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				BB01272C1D1D1D7600F9F18E /* VideosTableViewController.swift */,
+				BBAB1ABD1D1C800000E4FFE2 /* PhotosTableViewController.swift */,
+				BB01272E1D1D201400F9F18E /* AudiosTableViewController.swift */,
+				BB923F321D293B9D008ED74A /* ResetPasswordViewController.swift */,
+				BB5C456E1D325E6D00C8ADF7 /* SignUpViewController.swift */,
+				BB8AA2671D3977F60003AF85 /* UploadViewController.swift */,
 			);
 			name = "Example for WCApi";
 			path = WCApi;
@@ -157,6 +188,19 @@
 				0E013A27C300863E3F2E28FA /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		BBF833C31D1ABEA000AB0C42 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				BBF833D41D1ACD0D00AB0C42 /* audios@2x.png */,
+				BBF833D21D1AC10600AB0C42 /* audios.png */,
+				BBF833D81D1ACD8600AB0C42 /* videos.png */,
+				BBF833D91D1ACD8600AB0C42 /* videos@2x.png */,
+				BBF833DE1D1ACDC800AB0C42 /* photos.png */,
+				BBF833DF1D1ACDC800AB0C42 /* photos@2x.png */,
+			);
+			name = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,9 +290,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF833D51D1ACD0D00AB0C42 /* audios@2x.png in Resources */,
+				BBF833D31D1AC10600AB0C42 /* audios.png in Resources */,
+				BBF833E01D1ACDC800AB0C42 /* photos.png in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				BBF833DD1D1ACD8600AB0C42 /* videos@2x.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				BBF833E11D1ACDC800AB0C42 /* photos@2x.png in Resources */,
+				BBF833DC1D1ACD8600AB0C42 /* videos.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,8 +409,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				607FACD81AFB9204008FA782 /* LoginController.swift in Sources */,
+				BB8AA2681D3977F60003AF85 /* UploadViewController.swift in Sources */,
+				BB5C456F1D325E6D00C8ADF7 /* SignUpViewController.swift in Sources */,
+				BBAB1ABE1D1C800000E4FFE2 /* PhotosTableViewController.swift in Sources */,
+				BB01272F1D1D201400F9F18E /* AudiosTableViewController.swift in Sources */,
+				BB923F331D293B9D008ED74A /* ResetPasswordViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				BB01272D1D1D1D7600F9F18E /* VideosTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

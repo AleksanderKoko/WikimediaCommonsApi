@@ -1,19 +1,13 @@
 import Alamofire
 
-enum TokenTypes: String{
-    case LoginToken = "login"
-    case CreateUserToken = "createaccount"
-}
-
 public class GetToken {
     
     internal var handler: GetTokenHandlerProtocol?
     
-    enum ErrorMessages: String {
-        case FatalErrorCantProcessJSON
-        case FatalErrorCantGetResponse
-        case FatalErrorUnknownResultFromJSON
-        case FatalErrorNotAHandler
+    enum TokenTypes: String{
+        case LoginToken = "login"
+        case CreateUserToken = "createaccount"
+        case CSRF = "csrf"
     }
     
     func setHandler(handler: GetTokenHandlerProtocol){
@@ -26,7 +20,7 @@ public class GetToken {
             
             Alamofire.request(
                 .GET,
-                "https://en.wikipedia.org/w/api.php",
+                Config.apiUrl,
                 parameters: [
                     "action": "query",
                     "format": "json",
@@ -36,22 +30,29 @@ public class GetToken {
                     
                     if let JSON = response.result.value {
                         
-                        if let loginTokenKey = JSON.objectForKey("query")?.objectForKey("tokens")?.objectForKey("logintoken") {
+                        if let loginTokenKey = JSON.objectForKey("query")?.objectForKey("tokens")?.objectForKey("\(tokenType.rawValue)token") {
                             self.handler!.setToken(loginTokenKey as! String)
                         }else{
-                            self.handler!.getTokenFatalError(ErrorMessageGeneral(message: ErrorMessages.FatalErrorCantProcessJSON.rawValue))
+                            self.handler!.getTokenFatalError(GetTokenErrorFatal(message: GeneralErrorMessages.FatalErrorCantProcessJSON.rawValue))
                         }
                         
                     }else{
-                        self.handler!.getTokenFatalError(ErrorMessageGeneral(message: ErrorMessages.FatalErrorCantGetResponse.rawValue))
+                        self.handler!.getTokenFatalError(GetTokenErrorFatal(message: GeneralErrorMessages.FatalErrorCantGetResponse.rawValue))
                     }
                     
             }
             
         }else{
-            throw NoHandlerError()
+            throw NoHandlerException()
         }
         
     }
+    
+}
+
+public protocol GetTokenHandlerProtocol {
+    
+    func setToken(token: String) -> Void
+    func getTokenFatalError(error: GetTokenErrorFatal) -> Void
     
 }
