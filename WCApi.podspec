@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WCApi'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of WCApi.'
+  s.version          = '0.1.1'
+  s.summary          = 'WCApi is a simple package that makes working with Wikimedia Commons API simpler'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Wikimedia Commons API is really difficult to work with. API is changing all the time, many endpoints are not intuitive, for some simple calls they require up to 3-4 calls. This package makes some calls simple to use.
                        DESC
 
   s.homepage         = 'https://github.com/AleksanderKoko/WikimediaCommonsApi'

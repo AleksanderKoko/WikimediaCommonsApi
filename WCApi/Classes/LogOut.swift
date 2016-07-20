@@ -19,7 +19,7 @@ public class LogOut {
             ]
             ).responseJSON { response in
                 
-                if let JSON = response.result.value {
+                if response.result.value != nil {
                     self.handler.logOutSuccess()
                 }else{
                     self.handler.logOutError(LogOutFatalError(message: GeneralErrorMessages.FatalErrorCantGetResponse.rawValue))

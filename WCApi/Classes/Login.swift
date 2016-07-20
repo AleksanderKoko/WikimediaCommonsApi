@@ -53,7 +53,7 @@ public class Login : GetTokenHandlerProtocol {
                 "loginreturnurl": "http://example.org/",
                 "username": self.username!,
                 "password": self.password!,
-                "logintoken": self.token! as! String
+                "logintoken": self.token!
             ]
             ).responseJSON { response in
                 

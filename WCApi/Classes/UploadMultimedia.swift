@@ -74,7 +74,7 @@ public class UploadMultimedia : GetTokenHandlerProtocol {
         
         let licenseStr = "=={{int:license-header}}==\n{{self|\(license)}}\n\n"
         
-        var textStr = fileDescHeader + description + dateStr + author + permission + otherVersions + fileDescEnd + licenseStr
+        var textStr = fileDescHeader + description + dateStr + source + author + permission + otherVersions + fileDescEnd + licenseStr
         
         for category in categories {
             textStr += "[[Category:\(category)]]\n"
