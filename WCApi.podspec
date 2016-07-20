@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WCApi'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'WCApi is a simple package that makes working with Wikimedia Commons API simpler'
 
 # This description is used to generate tags and improve search results.
